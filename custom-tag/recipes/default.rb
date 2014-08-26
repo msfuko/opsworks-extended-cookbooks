@@ -9,10 +9,16 @@ response = http.request(request)
 instance_id = response.body
 
 
-node[:deploy][:customtags].each do |tagKey, tagValue|
-	execute "ec2tag" do
+node[:dcs][:customtags].each do |tagKey, tagValue|
+	execute "ec2tagdynamic" do
 	   command ". /etc/profile && /opt/aws/bin/ec2tag #{instance_id} -t #{tagKey}=#{tagValue}"
 	   action :run
 	   ignore_failure true
 	end
+end
+
+execute "ec2tagstatic" do
+   command ". /etc/profile && /opt/aws/bin/ec2tag #{instance_id} -t owner=hideto"
+   action :run
+   ignore_failure true
 end
