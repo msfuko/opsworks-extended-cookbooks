@@ -9,9 +9,10 @@ response = http.request(request)
 instance_id = response.body
 
 
-execute "ec2tag" do
-   command ". /etc/profile && /opt/aws/bin/ec2tag #{instance_id} -t owner=Hideto -t cc=AMT"
-   action :run
-   ignore_failure true
+node[:deploy][:tags].each do |tagKey, tagValue|
+	execute "ec2tag" do
+	   command ". /etc/profile && /opt/aws/bin/ec2tag #{instance_id} -t #{tagKey}=#{tagValue}"
+	   action :run
+	   ignore_failure true
+	end
 end
-
