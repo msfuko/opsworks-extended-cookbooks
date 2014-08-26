@@ -9,9 +9,9 @@ response = http.request(request)
 instance_id = response.body
 
 
-execute "set tag" do
-   command "ec2tag #{instance_id} -t owner=Hideto -t cc=AMT"
-   cwd "/"
+execute "ec2tag" do
+   command "/opt/aws/bin/ec2tag #{instance_id} -t owner=Hideto -t cc=AMT"
+   cwd "/opt/aws/bin"
    user "root"
    action :run
    ignore_failure true
