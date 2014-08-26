@@ -9,7 +9,7 @@ response = http.request(request)
 instance_id = response.body
 
 
-node[:deploy][:tags].each do |tagKey, tagValue|
+node[:deploy][:customtags].each do |tagKey, tagValue|
 	execute "ec2tag" do
 	   command ". /etc/profile && /opt/aws/bin/ec2tag #{instance_id} -t #{tagKey}=#{tagValue}"
 	   action :run
