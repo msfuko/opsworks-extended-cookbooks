@@ -10,7 +10,7 @@ instance_id = response.body
 
 
 execute "ec2tag" do
-   command "/opt/aws/bin/ec2tag #{instance_id} -t owner=Hideto -t cc=AMT"
+   command ". /etc/profile && /opt/aws/bin/ec2tag #{instance_id} -t owner=Hideto -t cc=AMT"
    action :run
    ignore_failure true
 end
