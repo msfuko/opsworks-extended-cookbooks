@@ -31,12 +31,12 @@
 credentials = {}
 
 # this may look strange, but one pair will be nil, so it all works out
-variables({
+variables(
 	:accessID  => node['sumologic-collector']['accessID'],
 	:accessKey => node['sumologic-collector']['accessKey'],
-	:email     => credentials[:email],
-	:password  => credentials[:password],
-	})
+	:email     => "dontcare@trend.com.tw",
+	:password  => "fakepassword"
+	)
 =begin
 if node[:sumologic][:credentials]
   creds = node[:sumologic][:credentials]
