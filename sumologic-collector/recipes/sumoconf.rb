@@ -50,8 +50,8 @@ template node['sumologic']['sumo_conf_path'] do
   
   # this may look strange, but one pair will be nil, so it all works out
 	variables({
-		:accessID  => node['sumologic-collector']['accessID'],
-		:accessKey => node['sumologic-collector']['accessKey'],
+		:accessID  => node['sumologic-collector-id'],
+		:accessKey => node['sumologic-collector-key'],
 		:email     => "dontcare@trend.com.tw",
 		:password  => "fakepassword"
 	})
