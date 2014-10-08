@@ -37,7 +37,7 @@ variables({
 	:email     => credentials[:email],
 	:password  => credentials[:password],
 	})
-"""
+=begin
 if node[:sumologic][:credentials]
   creds = node[:sumologic][:credentials]
 
@@ -84,4 +84,4 @@ template node['sumologic']['sumo_conf_path'] do
     :password  => credentials[:password],
   })
 end
-"""
+=end
