@@ -30,6 +30,14 @@
 #Use the credentials variable to keep the proper credentials - regardless of source
 credentials = {}
 
+#Check to see if the default sumo.conf was overridden
+conf_source = node['sumologic']['conf_template'] || 'sumo.conf.erb'
+
+# Create the conf file's parent directory (generally for Windows support)
+directory ::File.dirname(node['sumologic']['sumo_conf_path']) do
+  recursive true
+end
+
 template node['sumologic']['sumo_conf_path'] do
   cookbook node['sumologic']['conf_config_cookbook']
   source conf_source
