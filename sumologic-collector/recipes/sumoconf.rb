@@ -30,13 +30,25 @@
 #Use the credentials variable to keep the proper credentials - regardless of source
 credentials = {}
 
-# this may look strange, but one pair will be nil, so it all works out
-variables({
-	:accessID  => node['sumologic-collector']['accessID'],
-	:accessKey => node['sumologic-collector']['accessKey'],
-	:email     => "dontcare@trend.com.tw",
-	:password  => "fakepassword"
+template node['sumologic']['sumo_conf_path'] do
+  cookbook node['sumologic']['conf_config_cookbook']
+  source conf_source
+
+  unless platform?('windows')
+    owner 'root'
+    group 'root'
+    mode 0644
+  end
+  
+  # this may look strange, but one pair will be nil, so it all works out
+	variables({
+		:accessID  => node['sumologic-collector']['accessID'],
+		:accessKey => node['sumologic-collector']['accessKey'],
+		:email     => "dontcare@trend.com.tw",
+		:password  => "fakepassword"
 	})
+end
+# this may look strange, but one pair will be nil, so it all works out
 =begin
 if node[:sumologic][:credentials]
   creds = node[:sumologic][:credentials]
