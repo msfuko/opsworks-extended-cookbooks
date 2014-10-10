@@ -1,38 +1,66 @@
 {
-    "api.version": "v1",
-    "sources": [
-        {
-            "name": "Messages",
-            "sourceType": "LocalFile",
-            "automaticDateParsing": true,
-            "multilineProcessingEnabled": false,
-            "useAutolineMatching": true,
-            "forceTimeZone": false,
-            "timeZone": "UTC",
-            "category": "OS/Linux/System",
-            "pathExpression": "/var/log/messages"
-        },
-        {
-            "name": "Secure",
-            "sourceType": "LocalFile",
-            "automaticDateParsing": true,
-            "multilineProcessingEnabled": false,
-            "useAutolineMatching": true,
-            "forceTimeZone": false,
-            "timeZone": "UTC",
-            "category": "OS/Linux/Security",
-            "pathExpression": "/var/log/secure"
-        },
-        {
-            "name": "Syslog File",
-            "sourceType": "LocalFile",
-            "automaticDateParsing": true,
-            "multilineProcessingEnabled": false,
-            "useAutolineMatching": true,
-            "forceTimeZone": false,
-            "timeZone": "UTC",
-            "category": "OS/Linux/System",
-            "pathExpression": "/var/log/syslog"
-        }
-    ]
+"api.version":"v1",
+"sources" : [
+  {
+    "sourceType" : "LocalFile",
+    "name" : "linux-message",
+    "pathExpression" : "/var/log/messages*",
+    "category" : "OS/Linux/System",
+    "automaticDateParsing": true,
+    "multilineProcessingEnabled": false,
+    "useAutolineMatching": true,
+    "timeZone": "UTC"
+  },
+  {
+    "sourceType" : "LocalFile",
+    "name" : "linux-secure",
+    "pathExpression" : "/var/log/secure*",
+    "category" : "OS/Linux/Security",
+    "automaticDateParsing": true,
+    "multilineProcessingEnabled": false,
+    "useAutolineMatching": true,
+    "timeZone": "UTC"
+  },
+  {
+    "sourceType" : "LocalFile",
+    "name" : "linux-cron",
+    "pathExpression" : "/var/log/cron*",
+    "category" : "OS/Linux/System",
+    "automaticDateParsing": true,
+    "multilineProcessingEnabled": false,
+    "useAutolineMatching": true,
+    "timeZone": "UTC"
+  },
+  {
+    "sourceType" : "LocalFile",
+    "name" : "mail",
+    "pathExpression" : "/var/log/maillog*",
+    "category" : "OS/Linux/System",
+    "automaticDateParsing": true,
+    "multilineProcessingEnabled": false,
+    "useAutolineMatching": true,
+    "timeZone": "UTC"
+  },
+  {
+    "sourceType" : "LocalFile",
+    "name" : "tomcat",
+    "pathExpression" : "/var/log/tomcat7/catalina.*",
+    "category" : "tomcat/log",
+    "automaticDateParsing": true,
+    "multilineProcessingEnabled": false,
+    "useAutolineMatching": true,
+    "timeZone": "UTC"
+  },
+  {
+    "sourceType" : "LocalFile",
+    "name" : "tomcat-access",
+    "pathExpression" : "/var/log/tomcat7/*access*",
+    "category" : "tomcat/access",
+    "automaticDateParsing": true,
+    "multilineProcessingEnabled": false,
+    "useAutolineMatching": true,
+    "timeZone": "UTC"
+  }
+  ]
 }
+
