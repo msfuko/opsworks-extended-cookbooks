@@ -55,4 +55,4 @@ JAVA_OPTS="${JAVA_OPTS} <%= node['opsworks_java']['tomcat']['java_opts'] %>"
 # If you wish to further customize your tomcat environment,
 # put your own definitions here
 # (i.e. LD_LIBRARY_PATH for some jdbc drivers)
-AES_ENCRYPT_KEY="<%= node['deploy'][@application_name]['environment_variables']['AES_ENCRYPT_KEY'] %>"
+AES_ENCRYPT_KEY="<%= node['deploy'][@application]['environment_variables']['AES_ENCRYPT_KEY'] %>"
