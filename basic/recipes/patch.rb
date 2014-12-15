@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-patch=node['BL-1']['patch']['patch_list']
+patch=node['basic']['patch']['patch_list']
 
 
 patch.each do |p|

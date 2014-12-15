@@ -26,7 +26,7 @@ end
 bash "nrsysmond-config" do
   user "root"
   cwd "/tmp"
-  code "nrsysmond-config --set license_key=bc601ba34e286544df84d72865e2023b9f425b5c"
+  code "nrsysmond-config --set license_key=#{node['newrelic']['license']}"
   action :run
 end
 
