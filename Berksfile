@@ -1,2 +1,2 @@
-source "https://api.berkshelf.com" 
-cookbook "newrelic", git: 'git://github.com/escapestudios-cookbooks/newrelic.git', tag: '1.0.6'
+source 'https://supermarket.getchef.com'
+cookbook 'newrelic', '~> 2.5.1' 
