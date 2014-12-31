@@ -6,6 +6,6 @@ template "#{scripts[:install_dir]}/slack.sh" do
   mode '755'
   variables({
                 :webhook => node["sumoslack"]["webhook"],
-                :alertfolder => node["sumoslack"][:alert_dir]
+                :alertfolder => node["sumoslack"][:scripts][:alert_dir]
             })
 end
