@@ -1,5 +1,5 @@
 # install scripts
-template "#{scripts[:install_dir]}/slack.sh" do
+template "#{node["sumoslack"][:scripts][:install_dir]}/slack.sh" do
   source "slack.sh.erb"
   owner scripts[:user]
   group scripts[:group]
