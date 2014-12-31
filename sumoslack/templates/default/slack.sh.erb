@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+import requests
+import json
+import os
+
+WEBHOOK = "<%= @webhook %>"
+ALERT_FOLDER = "<%= @alertfolder %>"
+
+def get_latest_alert_message(_, dir_name, files):
+    # find the latest logs
+    global message
+    logstamp = 0
+    log = ""
+    for f in files:
+        alert_file_path = os.path.join(dir_name, f)
+        if os.path.getmtime(alert_file_path) > logstamp:
+            logstamp = os.path.getmtime(alert_file_path)
+            log = alert_file_path
+
+    print log
+    # read message inside
+    with open(log) as logf:
+        message = json.loads(logf.readline())
+
+
+def get_payload():
+    global message
+    payload = {
+        "username": "sumologic",
+        "attachments": [
+        {
+            "color": "#D00000",
+            "fields": [{}]
+        }
+        ]
+    }
+    attachment = payload['attachments'][0]
+    print message['messages'][0]['Message']
+    attachment['fallback'] = attachment['pretext'] = "[%s Alert] %s <%s | Link>" \
+        % (message['searchName'], message['messages'][0]['Message'], message['searchUrl'])
+
+    for info in ('Host', 'Name', 'Collector', 'Category'):
+        field = {
+            'title': info,
+            'value': message['messages'][0][info],
+            'short': "true"
+        }
+        attachment['fields'].append(field)
+    for info in ('searchQuery', 'totalCount'):
+        field = {
+            'title': info,
+            'value': message[info],
+            'short': "false"
+        }
+        attachment['fields'].append(field)
+
+    return payload
+
+
+if __name__ == '__main__':
+    message = None
+    os.path.walk(os.path.abspath(ALERT_FOLDER), get_latest_alert_message, 0)
+    print message
+    result = requests.post(WEBHOOK, data=json.dumps(get_payload()))
+    print "Slack output: {0}".format(result.text)
+
