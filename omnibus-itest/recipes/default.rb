@@ -7,7 +7,7 @@ template "#{scripts[:install_dir]}/omniitest.py" do
   source "omniitest.py.erb"
   owner scripts[:user]
   group scripts[:group]
-  mode '755
+  mode '755'
   variables({
                 :url => node["omniitest"]["url"],
                 :username => node["omniitest"]["username"],
