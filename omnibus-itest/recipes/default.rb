@@ -18,9 +18,7 @@ end
 # run scripts
 python "itest" do
   guard_interpreter :python
-  environment {"OMNIBUS_URL" => node["omniitest"]["url"],
-               "USERNAME" => node["omniitest"]["username"],  
-               "PASSWORD" => node["omniitest"]["password"] }
+  environment {	"OMNIBUS_URL" => node["omniitest"]["url"] }
   code "nosetests #{scripts[:install_dir]}/omniitest.py"
 end
 
