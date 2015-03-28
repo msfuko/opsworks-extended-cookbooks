@@ -23,7 +23,6 @@ end
 
 # run scripts
 python "itest" do
-  guard_interpreter :python
   code "nosetests #{scripts[:install_dir]}/omniitest.py"
 end
 
