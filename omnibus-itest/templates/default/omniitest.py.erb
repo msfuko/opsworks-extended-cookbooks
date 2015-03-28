@@ -7,9 +7,9 @@ import json
 import urlparse
 
 
-url = os.environ['OMNIBUS_URL']
-username = os.environ['USERNAME']
-password = os.environ['PASSWORD']
+url = "<%= @url %>"
+username = "<%= @username %>"
+password = "<%= @password %>"
 
 
 def get(request_url):
