@@ -8,3 +8,4 @@ cookbook "awscli", git: "https://github.com/Woorank/chef-awscli", ref: "aa1877e9
 cookbook "databag-util", git: "https://github.com/weseek/chef-databag-util"
 cookbook "ec2util", git: "https://github.com/weseek/chef-ec2util"
 cookbook "vpcnat", git: "https://github.com/msfuko/chef-vpcnat.git"
+cookbook "python", "~> 1.4.6"
