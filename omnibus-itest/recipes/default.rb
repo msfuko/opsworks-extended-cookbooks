@@ -11,7 +11,7 @@ template "#{scripts[:install_dir]}/omniitest.py" do
   variables({
                 :url => node["omniitest"]["url"],
                 :username => node["omniitest"]["username"],
-                :password => node["omniitest"]["password"],
+                :password => node["omniitest"]["password"]
             })'
 end
 
