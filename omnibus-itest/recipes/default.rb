@@ -12,7 +12,7 @@ template "#{scripts[:install_dir]}/omniitest.py" do
                 :url => node["omniitest"]["url"],
                 :username => node["omniitest"]["username"],
                 :password => node["omniitest"]["password"]
-            })'
+            })
 end
 
 # install nose
