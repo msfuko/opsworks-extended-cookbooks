@@ -1,4 +1,4 @@
-#include_recipe 'python'
+include_recipe 'python'
 
 scripts = node["omniitest"][:scripts]
 
