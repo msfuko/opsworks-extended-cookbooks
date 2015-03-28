@@ -29,8 +29,7 @@ python_pip "nose" do
 end
 
 # run scripts
-python "itest" do
-  code "nosetests #{scripts[:install_dir]}/omniitest.py"
+execute "itest" do
+  command "nosetests #{scripts[:install_dir]}/omniitest.py"
 end
-
 
