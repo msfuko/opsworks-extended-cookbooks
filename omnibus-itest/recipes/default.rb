@@ -3,6 +3,13 @@ include_recipe "python::pip"
 
 scripts = node["omniitest"][:scripts]
 
+# create directory
+directory "#{scripts[:install_dir]}" do
+  owner scripts[:user]
+  group scripts[:group]
+  recursive true
+end
+
 # install scripts
 template "#{scripts[:install_dir]}/omniitest.py" do
   source "omniitest.py.erb"
