@@ -1,5 +1,5 @@
 source "https://api.berkshelf.com"
-cookbook 'newrelic'
+cookbook 'newrelic', '= 2.8.0'
 #cookbook "sysctl", "= 0.4.0"
 #cookbook "iptables", "= 0.13.2"
 #cookbook "cron", "= 1.3.6"
