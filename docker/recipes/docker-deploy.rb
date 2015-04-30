@@ -28,6 +28,11 @@ node[:deploy].each do |application, deploy|
         docker rm #{deploy[:application]}
         sleep 3
       fi
+      if docker ps -a | grep #{deploy[:application]}; 
+      then
+        docker rm #{deploy[:application]}
+        sleep 3
+      fi
       if docker images | grep #{deploy[:application]}; 
       then
         docker rmi #{deploy[:application]}
