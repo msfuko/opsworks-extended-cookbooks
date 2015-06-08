@@ -7,10 +7,13 @@ when 'centos','redhat','fedora','amazon'
   package "docker" do
     action :install
   end
-  remote_file "/usr/bin/docker" do
-	source "https://get.docker.com/builds/Linux/x86_64/docker-latest"
-	mode '0777'
-	notifies :run, "service[docker]", :immediately
+  bash "upgrate_docker" do
+	user "root"
+	code <<-EOH
+		mv /usr/bin/docker /usr/bin/docker-old
+		wget https://get.docker.com/builds/Linux/x86_64/docker-latest -O /usr/bin/docker
+		chmod 777 /usr/bin/docker
+	EOH
   end
 end
 
