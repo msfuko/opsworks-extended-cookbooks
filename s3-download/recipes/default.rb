@@ -19,7 +19,7 @@ Chef::Log.info(file_content)
 file "#{file_path}" do
   owner 'root'
   group 'root'
-  mode '0400'
+  mode '0644'
   content file_content
   action :create
 end
