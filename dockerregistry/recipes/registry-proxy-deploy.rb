@@ -7,6 +7,25 @@ node[:deploy].each do |application, deploy|
     next
   end
 
+  # clean up
+  bash "docker-proxy-cleanup" do
+    user "root"
+    code <<-EOH
+      if docker ps | grep #{deploy[:application]}-proxy;
+      then
+        docker stop #{deploy[:application]}-proxy
+        sleep 3
+        docker rm #{deploy[:application]}-proxy
+        sleep 3
+      fi
+      if docker ps -a | grep #{deploy[:application]}-proxy;
+      then
+        docker rm #{deploy[:application]}-proxy
+        sleep 3
+      fi
+    EOH
+  end
+
   # cert
   file "#{deploy[:deploy_to]}/current/certs/docker-registry.crt" do
     owner deploy[:user]
@@ -31,7 +50,7 @@ node[:deploy].each do |application, deploy|
     user "root"
     cwd "#{deploy[:deploy_to]}/current"
     code <<-EOH
-      docker run -d -p 443:443 -e REGISTRY_HOST=#{deploy[:application]} -e REGISTRY_PORT=#{deploy[:environment_variables][:service_port]} -e SERVER_NAME="localhost" --link #{deploy[:application]}:#{deploy[:application]} -v /root/docker-registry.htpasswd:/etc/nginx/.htpasswd:ro -v #{deploy[:deploy_to]}/current/certs:/etc/nginx/ssl:ro containersol/docker-registry-proxy
+      docker run -d -p 443:443 -e REGISTRY_HOST=#{deploy[:application]} -e REGISTRY_PORT=#{deploy[:environment_variables][:service_port]} -e SERVER_NAME="localhost" --link #{deploy[:application]}:#{deploy[:application]} -v /root/docker-registry.htpasswd:/etc/nginx/.htpasswd:ro -v #{deploy[:deploy_to]}/current/certs:/etc/nginx/ssl:ro --name #{deploy[:application]}-proxy containersol/docker-registry-proxy
     -v $(pwd)/.htpasswd
     EOH
   end
