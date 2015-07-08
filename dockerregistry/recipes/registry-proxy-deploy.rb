@@ -25,6 +25,14 @@ node[:deploy].each do |application, deploy|
       fi
     EOH
   end
+  
+  # create cert dir
+  directory "#{deploy[:deploy_to]}/current/certs" do
+    mode 0755
+    owner 'root'
+    group 'root'
+    action :create
+  end
 
   # cert
   file "#{deploy[:deploy_to]}/current/certs/docker-registry.crt" do
