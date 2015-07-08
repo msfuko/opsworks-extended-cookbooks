@@ -58,8 +58,7 @@ node[:deploy].each do |application, deploy|
     user "root"
     cwd "#{deploy[:deploy_to]}/current"
     code <<-EOH
-      docker run -d -p 443:443 -e REGISTRY_HOST=#{deploy[:application]} -e REGISTRY_PORT=#{deploy[:environment_variables][:service_port]} -e SERVER_NAME="localhost" --link #{deploy[:application]}:#{deploy[:application]} -v /root/docker-registry.htpasswd:/etc/nginx/.htpasswd:ro -v #{deploy[:deploy_to]}/current/certs:/etc/nginx/ssl:ro --name #{deploy[:application]}-proxy containersol/docker-registry-proxy
-    -v $(pwd)/.htpasswd
+      docker run -d -p 443:443 -e REGISTRY_HOST=#{deploy[:application]} -e REGISTRY_PORT=#{deploy[:environment_variables][:service_port]} -e SERVER_NAME=localhost --link #{deploy[:application]}:#{deploy[:application]} -v /root/docker-registry.htpasswd:/etc/nginx/.htpasswd:ro -v #{deploy[:deploy_to]}/current/certs:/etc/nginx/ssl:ro --name #{deploy[:application]}-proxy containersol/docker-registry-proxy 
     EOH
   end
 
