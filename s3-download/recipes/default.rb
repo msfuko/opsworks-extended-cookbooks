@@ -2,7 +2,7 @@ require 'aws-sdk'
 
 s3 = AWS::S3.new
 
-bucket_name = node["s3-download"]["bucket_name"]
+bucket_name = node["s3-download"]["bucket"]
 obj_name = node["s3-download"]["obj_name"]
 file_path = node["s3-download"]["file_path"]
 
