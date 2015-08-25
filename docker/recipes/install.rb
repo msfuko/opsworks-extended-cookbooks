@@ -1,3 +1,4 @@
+# install 
 case node[:platform]
 when "ubuntu","debian"
   package "docker.io" do
@@ -17,6 +18,24 @@ when 'centos','redhat','fedora','amazon'
   #end
 end
 
+# config 
+template "/etc/sysconfig/docker" do
+  source "docker.config.erb"
+  variables({
+	:registry => node["docker"]["registry"]
+  })
+end
+
+# put the credential
+template "/root/.dockercfg" do
+  source "docker.credential.erb"
+  variables({
+	:registry => node["docker"]["registry"],
+	:auth => node["docker"]["auth"],
+	:email => node["docker"]["email"]
+  })
+
+# start
 service "docker" do
   action :start
 end
