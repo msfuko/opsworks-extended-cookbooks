@@ -34,6 +34,7 @@ template "/root/.dockercfg" do
 	:auth => node["docker"]["auth"],
 	:email => node["docker"]["email"]
   })
+end
 
 # start
 service "docker" do
