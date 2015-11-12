@@ -6,6 +6,9 @@ bucket_name = node["s3-download"]["bucket"]
 obj_name = node["s3-download"]["obj_name"]
 file_path = node["s3-download"]["file_path"]
 
+# Log output
+Chef::Log.info("#{bucket_name} #{obj_name}")
+
 # Set bucket and object name
 obj = s3.buckets["#{bucket_name}"].objects["#{obj_name}"]
 
