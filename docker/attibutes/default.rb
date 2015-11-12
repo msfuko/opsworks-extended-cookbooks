@@ -1,10 +1,10 @@
-default["docker"] = {}
+node.default["docker"] = {}
 
 # docker registry url
-default["docker"]["registry"] = ""
+node.default["docker"]["registry"] = ""
 
 # docker registry auth base64
-default["docker"]["auth"] = ""
+node.default["docker"]["auth"] = ""
 
 # docker registry auth email
-default["docker"]["email"] = "dcsrd@trendmicro.com"
+node.default["docker"]["email"] = "dcsrd@trendmicro.com"
