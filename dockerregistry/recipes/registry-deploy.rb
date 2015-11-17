@@ -40,8 +40,8 @@ node[:deploy].each do |application, deploy|
     EOH
   end
 
-  # install scripts
-  template "#{deploy[:deploy_to]}/current/cmd/registry/config.yml" do
+  # install scripts - the config path of docker distribution 2.2 is changed to config-dev.yml
+  template "#{deploy[:deploy_to]}/current/cmd/registry/config-dev.yml" do
     source "config.yml.erb"
     variables({
                 :region => node["dockerregistry"]["region"],
